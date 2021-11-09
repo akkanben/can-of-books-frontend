@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import BookCarousel from './BookCarousel';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -8,8 +9,6 @@ class BestBooks extends React.Component {
       books: []
     }
   }
-
-  /* TODO: Make a GET request to your API to fetch books for the logged in user  */
 
   componentDidMount() {
     this.getBooks()
@@ -26,15 +25,12 @@ class BestBooks extends React.Component {
   }
 
   render() {
-
-    /* TODO: render user's books in a Carousel */
-
     return (
       <>
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
 
         {this.state.books.length > 0 ? (
-          <p>Book Carousel coming soon</p>
+          <BookCarousel books={this.state.books}/>
         ) : (
           <h3>No Books Found :(</h3>
         )}

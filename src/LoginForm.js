@@ -20,6 +20,12 @@ class LoginForm extends Component {
 
   }
 
+  handleEmailChange = (e) => {
+    e.preventDefault();
+    this.setState({email: e.target.value})
+
+  }
+
   render() {
     /* TODO: create a simple login form that collects username and and email, and lets parent component know when form has been submitted */
     return (
@@ -27,7 +33,7 @@ class LoginForm extends Component {
         <p>LoginForm Coming Soon</p>
         <>
           <input type='text' onChange={this.handleChange} placeholder="enter username" />
-          <input type='text' onChange={this.handleChange} placeholder="enter email" />
+          <input type='text' onChange={this.handleEmailChange} placeholder="enter email" />
           <button onClick={this.handleClick}>Submit</button>
         </>
       </>

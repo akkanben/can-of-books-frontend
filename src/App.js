@@ -3,6 +3,7 @@ import Header from './Header';
 import Footer from './Footer';
 import Login from './Login';
 import BestBooks from './BestBooks';
+import Profile from './Profile';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
   BrowserRouter as Router,
@@ -28,6 +29,7 @@ class App extends React.Component {
 
   logoutHandler = () => {
     this.setState({
+      email: null,
       user: null,
     })
   }
@@ -41,7 +43,9 @@ class App extends React.Component {
             <Route exact path="/">
               {this.state.user ? <BestBooks /> : <Login loginHandler={this.loginHandler} />}
             </Route>
-            {/* TODO: add a route with a path of '/profile' that renders a `Profile` component */}
+            <Route exact path="/profile">
+              {this.state.user ? <Profile email={this.state.email} user={this.state.user} /> : <Login loginHandler={this.loginHandler} />}
+            </Route>
           </Switch>
           <Footer />
         </Router>

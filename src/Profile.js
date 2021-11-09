@@ -3,9 +3,10 @@ import { Component } from "react";
 class Profile extends Component {
 
   render() {
-    /* TODO: render information about logged in user */
-    /* STRETCH TODO: if no logged in user then redirect home */
-    return <p>Profile page coming soon</p>
+    return ( <ul>
+      <li>Username: {this.props.user}</li>
+      <li>Email: {this.props.email}</li>
+    </ul> )
   }
 };
 

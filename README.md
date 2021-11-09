@@ -1,24 +1,22 @@
 # Project Name
 
 **Author**: [Jordan Fleming](https://github.com/Jofleming), [Ben Mills](https://github.com/akkanben)
-**Version**: 1.0.0
+**Version**: 1.0.1
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+To create an online library of my personal book collection, so that I can browse and view what books I own.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+- Set REACT_APP_DB_URL in your '.env' file to server, either localhost or url.
+- See server project at: 'https://github.com/Jofleming/can-of-books-backend' for info on server setup.
+- Run the application with 'npm start'
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+Application uses JavaScript, NPM, React, React-bootstrap, React-router, axios, and CSS.
+
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
-
-## Estimates
-<!-- See below -->
+11-18-2021 4:59pm - Application now logs username, email, and renders book carousel for the user.
 
 ## Credit and Collaborations
 ### Logistical
@@ -59,16 +57,16 @@
   - We can do our best to bring the other person up to speed. Treat each circumstance as an opportunity to learn or to mentor to cement own knowledge.
 
 
-Time Estimates
+## Time Estimates
 
 
 | # | Feature Name                            | Estimated Time |  Start   | Finish  | Actual |
 | - | --------------------------------------- | -------------- | -------- | ------- | ------ |
-| 1 | Set up Repos                            | 01:00          | 02:00PM  | 00:00PM | 00:00  |
-| 2 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
-| 3 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
+| 1 | Set up Repos                            | 01:00          | 02:00PM  | 03:00PM | 01:00  |
+| 2 | Storage                                 | 01:30          | 03:00PM  | 05:00PM | 02:00  |
+| 3 | Book Component                          | 02:00          | 05:00PM  | 06:00PM | 01:00  |
+| - | Book Component Cont                     | 00:00          | 08:30PM  | 10:30PM | 02:00  |
 | 4 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
 | 5 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
 | 6 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
-| 7 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
 
