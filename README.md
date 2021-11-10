@@ -1,7 +1,7 @@
 # Project Name
 
 **Author**: [Jordan Fleming](https://github.com/Jofleming), [Ben Mills](https://github.com/akkanben)
-**Version**: 1.0.1
+**Version**: 1.0.2
 
 ## Overview
 To create an online library of my personal book collection, so that I can browse and view what books I own.
@@ -16,7 +16,8 @@ Application uses JavaScript, NPM, React, React-bootstrap, React-router, axios, a
 
 
 ## Change Log
-11-18-2021 4:59pm - Application now logs username, email, and renders book carousel for the user.
+11-08-2021 4:59pm - Application now logs username, email, and renders book carousel for the user.
+11-09-2021 10:47PM - Application now creates books and posts them to database, as well as deletes books.
 
 ## Credit and Collaborations
 ### Logistical
@@ -66,7 +67,7 @@ Application uses JavaScript, NPM, React, React-bootstrap, React-router, axios, a
 | 2 | Storage                                 | 01:30          | 03:00PM  | 05:00PM | 02:00  |
 | 3 | Book Component                          | 02:00          | 05:00PM  | 06:00PM | 01:00  |
 | - | Book Component Cont                     | 00:00          | 08:30PM  | 10:30PM | 02:00  |
-| 4 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
-| 5 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
+| 4 | Post Functionality                      | 01:00          | 04:30PM  | 06:30PM | 02:00  |
+| 5 | Delete Functionality                    | 01:30          | 08:15PM  | 10:15PM | 02:00  |
 | 6 |                                         | 00:00          | 00:00PM  | 00:00PM | 00:00  |
 

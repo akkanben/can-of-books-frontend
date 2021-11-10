@@ -2,9 +2,10 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import Login from './Login';
-import BestBooks from './BestBooks';
 import Profile from './Profile';
+import BestBooks from './BestBooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
@@ -12,7 +13,6 @@ import {
 } from "react-router-dom";
 
 class App extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -38,7 +38,7 @@ class App extends React.Component {
     return (
       <>
         <Router>
-          <Header user={this.state.user} onLogout={this.logoutHandler} />
+          <Header showModal={this.showModal} user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
               {this.state.user ? <BestBooks /> : <Login loginHandler={this.loginHandler} />}
