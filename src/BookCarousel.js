@@ -8,9 +8,9 @@ class BookCarousel extends React.Component {
     return (
       <>
         <Carousel>
-            {this.props.books.map(book => {
+            {this.props.books.map((book, index) => {
                 return (
-                    <Carousel.Item>
+                    <Carousel.Item id={book._id}>
                     <img
                         className="d-block w-100"
                         src={blankBook}
