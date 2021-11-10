@@ -1,7 +1,7 @@
 import {Component} from "react";
+import { Form } from "react-bootstrap";
 
 class LoginForm extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -27,16 +27,12 @@ class LoginForm extends Component {
   }
 
   render() {
-    /* TODO: create a simple login form that collects username and and email, and lets parent component know when form has been submitted */
     return (
-      <>
-        <p>LoginForm Coming Soon</p>
-        <>
-          <input type='text' onChange={this.handleChange} placeholder="enter username" />
-          <input type='text' onChange={this.handleEmailChange} placeholder="enter email" />
-          <button onClick={this.handleClick}>Submit</button>
-        </>
-      </>
+      <Form>
+        <Form.Control type='text' onChange={this.handleEmailChange} placeholder="enter email" required/>
+        <Form.Control type='text' onChange={this.handleChange} placeholder="enter username" required/>
+        <button onClick={this.handleClick}>Submit</button>
+      </Form>
     );
   }
 };

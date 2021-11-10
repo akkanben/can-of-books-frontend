@@ -12,6 +12,7 @@ class NewBookForm extends Component {
     const status = event.target.formStatus.value;
     const email = event.target.formEmail.value;
     const bookObj = {title, description, status, email};
+    event.target.reset();
     this.props.postBooks(bookObj);
   }
 

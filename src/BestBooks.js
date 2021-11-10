@@ -48,6 +48,17 @@ class BestBooks extends React.Component {
     }
   }
 
+  deleteBooks = async (id, email) => {
+    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${email}`
+    try {
+      let response = await axios.delete(url);
+      let filteredBooks = this.state.books.filter(book => book._id !== id);
+      this.setState({books: filteredBooks});
+    } catch (error) {
+      alert(error.toString());
+    }
+  };
+
   render() {
     return (
       <>
@@ -55,7 +66,7 @@ class BestBooks extends React.Component {
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
         <button onClick={this.showModal} >Create Book</button>
         {this.state.books.length > 0 ? (
-          <BookCarousel books={this.state.books} />
+          <BookCarousel books={this.state.books} deleteBooks={this.deleteBooks} />
         ) : (
           <h3>No Books Found :(</h3>
         )}
