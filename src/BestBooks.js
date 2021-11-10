@@ -51,7 +51,7 @@ class BestBooks extends React.Component {
   deleteBooks = async (id, email) => {
     const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${email}`
     try {
-      let response = await axios.delete(url);
+      await axios.delete(url);
       let filteredBooks = this.state.books.filter(book => book._id !== id);
       this.setState({books: filteredBooks});
     } catch (error) {

@@ -5,7 +5,6 @@ import Login from './Login';
 import Profile from './Profile';
 import BestBooks from './BestBooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import {
   BrowserRouter as Router,
   Switch,
