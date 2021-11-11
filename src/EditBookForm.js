@@ -29,7 +29,7 @@ class EditBookForm extends Component {
             <Form.Control type="name" placeholder="Enter book description" defaultValue={this.props.booktoEdit.description} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formStatus">
-            <Form.Check type="checkbox" label="read" checked={this.props.booktoEdit.status} />
+            <Form.Check type="checkbox" label="read" defaultChecked={this.props.booktoEdit.status} />
           </Form.Group>
           <Button variant="dark" type="submit">
             Submit

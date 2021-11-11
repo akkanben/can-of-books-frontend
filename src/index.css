@@ -1,0 +1,56 @@
+body {
+  /*background: rgb(41,0,0);*/
+/*background: radial-gradient(circle, rgba(41,0,0,1) 30%, rgba(205,101,11,1) 66%, rgba(116,98,6,1) 100%);*/
+ background: rgb(255,255,255);
+background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(124,124,122,1) 86%); 
+}
+
+#footer {
+  width: 100%;
+  flex-shrink: 0;
+  margin-top: 10%;
+
+}
+
+.btn {
+  max-width: 150px;
+  align-self: center;
+}
+
+#body-container {
+  padding: 0;
+}
+
+.carousel, ul{
+  flex-grow: 1;
+}
+
+h2 {
+  align-self: center;
+  padding-top: 3%;
+}
+.carousel, .card{
+box-shadow:
+  5.2px 2.8px 0px -46px rgba(0, 0, 0, 0.045),
+  12.6px 6.7px 3.9px -46px rgba(0, 0, 0, 0.05),
+  23.7px 12.5px 12.9px -46px rgba(0, 0, 0, 0.05),
+  42.2px 22.3px 29.1px -46px rgba(0, 0, 0, 0.051),
+  79px 41.8px 57.8px -46px rgba(0, 0, 0, 0.055),
+  189px 100px 126px -46px rgba(0, 0, 0, 0.07)
+;
+}
+
+img {
+  border-radius: 8px;
+}
+#header {
+
+}
+
+#logout-button {
+
+}
+
+.carousel-button {
+  margin: 2% 2%;
+}

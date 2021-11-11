@@ -96,7 +96,7 @@ class BestBooks extends React.Component {
           postBooks={this.postBooks}
           putBooks={this.putBooks} />
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        <Button onClick={() => this.showModal('Create a Book')} >Create Book</Button>
+        <Button className="carousel-button" onClick={() => this.showModal('Create a Book')} >Create Book</Button>
         {this.state.books.length > 0 ?
           <BookCarousel
             showModal={this.showModal}

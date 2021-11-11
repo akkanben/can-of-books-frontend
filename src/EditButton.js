@@ -9,7 +9,7 @@ export default class EditButton extends Component {
 
   render() {
     return (
-      <Button onClick={this.handleClick}>Edit Book</Button>
+      <Button  className="carousel-button" onClick={this.handleClick}>Edit Book</Button>
     )
   }
 }

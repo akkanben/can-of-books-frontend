@@ -9,7 +9,7 @@ export default class Delete extends Component {
 
   render() {
     return (
-        <Button onClick={this.handleClick}>Delete Book</Button>
+      <Button className="carousel-button" onClick={this.handleClick}>Delete Book</Button>
     )
   }
 }
