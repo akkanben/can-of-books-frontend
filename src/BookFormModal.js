@@ -13,7 +13,13 @@ class BookFormModal extends Component {
           <Modal.Title id="contained-modal-title-vcenter">{this.props.modalTitle}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {this.props.modalTitle === 'Edit Book Information' ? <EditBookForm booktoEdit={this.props.booktoEdit}/> : <NewBookForm postBooks={this.props.postBooks} />}
+          {this.props.modalTitle === 'Edit Book Information' ?
+            <EditBookForm
+              booktoEditId={this.props.booktoEditId}
+              hideModal={this.props.hideModal}
+              booktoEdit={this.props.booktoEdit}
+              putBooks={this.props.putBooks} />
+            : <NewBookForm postBooks={this.props.postBooks} />}
         </Modal.Body>
         <Modal.Footer>
           <Button onClick={this.props.hideModal}>Close</Button>

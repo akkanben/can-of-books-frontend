@@ -9,7 +9,7 @@ class NewBookForm extends Component {
     event.preventDefault();
     const title = event.target.formTitle.value;
     const description = event.target.formDescription.value;
-    const status = event.target.formStatus.value;
+    const status = event.target.formStatus.checked;
     const bookObj = {title, description, status};
     event.target.reset();
     this.props.postBooks(bookObj);
@@ -28,8 +28,7 @@ class NewBookForm extends Component {
             <Form.Control type="name" placeholder="Enter book description" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formStatus">
-            <Form.Label>Status</Form.Label>
-            <Form.Control type="name" placeholder="Enter book status" />
+            <Form.Check type="checkbox" label="read"/>
           </Form.Group>
           <Button variant="dark" type="submit">
             Submit
