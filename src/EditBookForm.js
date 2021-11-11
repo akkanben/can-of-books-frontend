@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 
-class NewBookForm extends Component {
+class EditBookForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
@@ -12,7 +12,8 @@ class NewBookForm extends Component {
     const status = event.target.formStatus.checked;
     const bookObj = {title, description, status};
     event.target.reset();
-    this.props.postBooks(bookObj);
+    this.props.putBooks(this.props.booktoEditId, bookObj);
+    this.props.hideModal();
   }
 
   render() {
@@ -21,14 +22,14 @@ class NewBookForm extends Component {
         <Form onSubmit={this.handleSubmit}>
           <Form.Group className="mb-3" controlId="formTitle">
             <Form.Label>Title</Form.Label>
-            <Form.Control type="name" placeholder="Enter book title" />
+            <Form.Control type="name" placeholder="Enter book title" defaultValue={this.props.booktoEdit.title} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formDescription">
             <Form.Label>Description</Form.Label>
-            <Form.Control type="name" placeholder="Enter book description" />
+            <Form.Control type="name" placeholder="Enter book description" defaultValue={this.props.booktoEdit.description} />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formStatus">
-            <Form.Check type="checkbox" label="read"/>
+            <Form.Check type="checkbox" label="read" defaultChecked={this.props.booktoEdit.status} />
           </Form.Group>
           <Button variant="dark" type="submit">
             Submit
@@ -39,4 +40,4 @@ class NewBookForm extends Component {
   }
 };
 
-export default NewBookForm;
+export default EditBookForm;

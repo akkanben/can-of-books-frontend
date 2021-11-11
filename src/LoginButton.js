@@ -1,5 +1,6 @@
 import {Component} from 'react'
 import LoginForm from './LoginForm';
+import Button from 'react-bootstrap/Button';
 
 export default class LoginButton extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ export default class LoginButton extends Component {
   render() {
     return (
       <>
-        {this.state.clicked ? <LoginForm loginHandler={this.props.loginHandler}/> : <button onClick={this.handleClick}>Login</button>}
+        {this.state.clicked ? <LoginForm loginHandler={this.props.loginHandler} /> : <Button onClick={this.handleClick}>Login</Button>}
       </>
     )
   }

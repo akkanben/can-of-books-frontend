@@ -2,13 +2,16 @@ import React from 'react';
 import axios from 'axios';
 import BookCarousel from './BookCarousel';
 import BookFormModal from './BookFormModal';
+import Button from 'react-bootstrap/Button';
 
 class BestBooks extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       books: [],
-      modal: false
+      modal: false,
+      modalTitle: '',
+      booktoEdit: {}
     }
   }
 
@@ -17,39 +20,51 @@ class BestBooks extends React.Component {
   }
 
   getBooks = async () => {
-    let apiUrl = `${process.env.REACT_APP_DB_URL}/books`;
+    let apiUrl = `${process.env.REACT_APP_DB_URL}/books?email=${this.props.email}`;
     try {
       const response = await axios.get(apiUrl);
       this.setState({books: response.data})
     } catch (error) {
-      alert(error.toString());
+      console.log(error);
     }
   }
 
-  showModal = () => {
-    this.setState({
-      modal: true,
-    })
+  showModal = (title, id, bookObj) => {
+    if (bookObj && id) {
+      this.setState({
+        modal: true,
+        modalTitle: title,
+        booktoEdit: bookObj,
+        booktoEditId: id,
+      });
+    } else {
+      this.setState({
+        modal: true,
+        modalTitle: title,
+      });
+
+    }
   }
 
   hideModal = () => {
     this.setState({
       modal: false,
+      modalTitle: '',
     })
   }
 
   postBooks = async (bookObj) => {
     const url = `${process.env.REACT_APP_DB_URL}/books`
     try {
-      let response = await axios.post(url, bookObj);
+      let response = await axios.post(url, {...bookObj, email: this.props.email});
       this.setState({books: [...this.state.books, response.data]})
     } catch (error) {
       alert(error.toString());
     }
   }
 
-  deleteBooks = async (id, email) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${email}`
+  deleteBooks = async (id) => {
+    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`
     try {
       await axios.delete(url);
       let filteredBooks = this.state.books.filter(book => book._id !== id);
@@ -59,17 +74,36 @@ class BestBooks extends React.Component {
     }
   };
 
+  putBooks = async (id, bookObj) => {
+    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`
+    try {
+      await axios.put(url, bookObj);
+      this.getBooks();
+    } catch (error) {
+      alert(error.toString());
+    }
+  }
+
   render() {
     return (
       <>
-        <BookFormModal modal={this.state.modal} hideModal={this.hideModal} postBooks={this.postBooks} />
+        <BookFormModal
+          booktoEdit={this.state.booktoEdit}
+          booktoEditId={this.state.booktoEditId}
+          modalTitle={this.state.modalTitle}
+          modal={this.state.modal}
+          hideModal={this.hideModal}
+          postBooks={this.postBooks}
+          putBooks={this.putBooks} />
         <h2>My Essential Lifelong Learning &amp; Formation Shelf</h2>
-        <button onClick={this.showModal} >Create Book</button>
-        {this.state.books.length > 0 ? (
-          <BookCarousel books={this.state.books} deleteBooks={this.deleteBooks} />
-        ) : (
-          <h3>No Books Found :(</h3>
-        )}
+        <Button className="carousel-button" onClick={() => this.showModal('Create a Book')} >Create Book</Button>
+        {this.state.books.length > 0 ?
+          <BookCarousel
+            showModal={this.showModal}
+            books={this.state.books}
+            deleteBooks={this.deleteBooks} />
+          : <h3>No Books Found :(</h3>
+        }
       </>
     )
   }
