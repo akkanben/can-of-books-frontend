@@ -40,10 +40,10 @@ class App extends React.Component {
           <Header showModal={this.showModal} user={this.state.user} onLogout={this.logoutHandler} />
           <Switch>
             <Route exact path="/">
-              {this.state.user ? <BestBooks /> : <Login loginHandler={this.loginHandler} />}
+              {this.state.user && this.state.email ? <BestBooks email={this.state.email}/> : <Login loginHandler={this.loginHandler} />}
             </Route>
             <Route exact path="/profile">
-              {this.state.user ? <Profile email={this.state.email} user={this.state.user} /> : <Login loginHandler={this.loginHandler} />}
+              {this.state.user && this.state.email ? <Profile email={this.state.email} user={this.state.user} /> : <Login loginHandler={this.loginHandler} />}
             </Route>
           </Switch>
           <Footer />

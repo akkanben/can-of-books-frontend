@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 export default class Delete extends Component {
 
   handleClick = () => {
-    this.props.deleteBooks(this.props.id, this.props.email);
+    this.props.deleteBooks(this.props.id);
   }
 
   render() {

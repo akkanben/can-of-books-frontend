@@ -2,6 +2,8 @@ import React from 'react';
 import blankBook from './images/blankBook.jpg';
 import Carousel from 'react-bootstrap/Carousel';
 import Delete from './Delete';
+import EditButton from './EditButton';
+
 
 class BookCarousel extends React.Component {
   render() {
@@ -20,7 +22,8 @@ class BookCarousel extends React.Component {
                         <h2>{book.title}</h2>
                         <p>{book.description}</p>
                         <p>{book.status}</p>
-                        <Delete email={book.email} id={book._id} deleteBooks={this.props.deleteBooks}/>
+                        <EditButton showModal={this.props.showModal} book={book}/>
+                        <Delete id={book._id} deleteBooks={this.props.deleteBooks}/>
                     </Carousel.Caption>
                 </Carousel.Item>
                 )
