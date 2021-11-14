@@ -21,8 +21,13 @@ background: radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(124,124,122,1) 
   padding: 0;
 }
 
-.carousel, ul{
+.carousel, ul, #login{
   flex-grow: 1;
+}
+
+#login {
+  display: flex;
+  justify-content: center;
 }
 
 h2 {
@@ -44,8 +49,8 @@ img {
   border-radius: 8px;
 }
 #user-picture {
-  max-width: 200px;
-  max-height: 200px;
+  max-height: 400px;
+  align-self: center;
 }
 .carousel-button {
   margin: 2% 2%;

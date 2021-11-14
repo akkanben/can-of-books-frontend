@@ -4,7 +4,7 @@ import {Navbar, NavItem} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import './Header.css';
 import LogoutButton from './LogoutButton';
-import {Redirect} from 'react-router';
+//import {Redirect} from 'react-router';
 
 class Header extends React.Component {
   render() {
@@ -15,10 +15,9 @@ class Header extends React.Component {
         {this.props.auth0.isAuthenticated &&
           <>
             <NavItem><Link to="/profile" className="nav-link">Profile</Link></NavItem>
-
             <NavItem className="ml-auto"> <LogoutButton id="logout-button" onLogout={this.props.onLogout} /></NavItem>
           </>
-          // : <Redirect from='/profile/' to='/' />
+          //  : <Redirect from='/profile' to='/' />
         }
       </Navbar>
     )

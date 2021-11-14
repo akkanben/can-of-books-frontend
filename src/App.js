@@ -2,7 +2,7 @@ import React from 'react';
 import {withAuth0} from '@auth0/auth0-react';
 import Header from './Header';
 import Footer from './Footer';
-import LoginButton from './LoginButton';
+import Login from './Login';
 import Profile from './Profile';
 import BestBooks from './BestBooks';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -43,7 +43,7 @@ class App extends React.Component {
             <Header showModal={this.showModal} user={this.props.auth0} onLogout={this.logoutHandler} />
             <Switch id="background">
               <Route exact path="/">
-                {this.props.auth0.isAuthenticated ? <BestBooks /> : <LoginButton />}
+                {this.props.auth0.isAuthenticated ? <BestBooks /> : <div id="login"><Login /></div>}
               </Route>
               <Route exact path="/profile">
                 {this.props.auth0.isAuthenticated && <Profile />}

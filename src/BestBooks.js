@@ -21,7 +21,6 @@ class BestBooks extends React.Component {
   }
 
   getBooks = async () => {
-
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
@@ -41,7 +40,6 @@ class BestBooks extends React.Component {
   }
 
   postBooks = async (bookObj) => {
-    console.log(bookObj)
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
@@ -51,24 +49,14 @@ class BestBooks extends React.Component {
         baseURL: process.env.REACT_APP_DB_URL,
         url: '/books',
         data: bookObj,
-        transformRequest: [function (data, headers) {
-          return JSON.stringify(data);
-        }]
-
       }
-      console.log(res);
-      console.log(jwt);
-      console.log(config);
       try {
         let response = await axios(config);
-        console.log(response);
         this.setState({books: [...this.state.books, response.data]})
       } catch (error) {
         console.error(error.toString());
       }
     }
-
-
   }
 
   showModal = (title, id, bookObj) => {
@@ -95,28 +83,47 @@ class BestBooks extends React.Component {
     })
   }
 
-
-
-  deleteBooks = async (id) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`
-    try {
-      await axios.delete(url);
-      let filteredBooks = this.state.books.filter(book => book._id !== id);
-      this.setState({books: filteredBooks});
-    } catch (error) {
-      alert(error.toString());
+  deleteBooks = async (id, bookObj) => {
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'delete',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: `/books/${id}`,
+        data: {...bookObj, email: this.props.auth0.user.email},
+      }
+      try {
+        await axios(config);
+        let filteredBooks = this.state.books.filter(book => book._id !== id);
+        this.setState({books: filteredBooks});
+      } catch (error) {
+        console.error(error.toString());
+      }
     }
-  };
+  }
+
 
   putBooks = async (id, bookObj) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`
-    try {
-      await axios.put(url, bookObj);
-      this.getBooks();
-    } catch (error) {
-      alert(error.toString());
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'put',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: `/books/${id}`,
+        data: {...bookObj, email: this.props.auth0.user.email},
+      }
+      try {
+        await axios(config);
+        this.getBooks();
+      } catch (error) {
+        console.error(error.toString());
+      }
     }
-  };
+  }
 
   render() {
     return (
