@@ -51,12 +51,20 @@ class BestBooks extends React.Component {
         baseURL: process.env.REACT_APP_DB_URL,
         url: '/books',
         data: bookObj,
+        transformRequest: [function (data, headers) {
+          return JSON.stringify(data);
+        }]
+
       }
+      console.log(res);
+      console.log(jwt);
+      console.log(config);
       try {
-        let response = await axios({config});
+        let response = await axios(config);
+        console.log(response);
         this.setState({books: [...this.state.books, response.data]})
       } catch (error) {
-        alert(error.toString());
+        console.error(error.toString());
       }
     }
 
