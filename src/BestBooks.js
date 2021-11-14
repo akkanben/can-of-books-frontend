@@ -40,6 +40,29 @@ class BestBooks extends React.Component {
     }
   }
 
+  postBooks = async (bookObj) => {
+    console.log(bookObj)
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'post',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: '/books',
+        data: bookObj,
+      }
+      try {
+        let response = await axios({config});
+        this.setState({books: [...this.state.books, response.data]})
+      } catch (error) {
+        alert(error.toString());
+      }
+    }
+
+
+  }
+
   showModal = (title, id, bookObj) => {
     if (bookObj && id) {
       this.setState({
@@ -64,15 +87,7 @@ class BestBooks extends React.Component {
     })
   }
 
-  postBooks = async (bookObj) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books`
-    try {
-      let response = await axios.post(url, {...bookObj, email: this.props.email});
-      this.setState({books: [...this.state.books, response.data]})
-    } catch (error) {
-      alert(error.toString());
-    }
-  }
+
 
   deleteBooks = async (id) => {
     const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`

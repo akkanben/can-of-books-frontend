@@ -43,14 +43,10 @@ box-shadow:
 img {
   border-radius: 8px;
 }
-#header {
-
+#user-picture {
+  max-width: 200px;
+  max-height: 200px;
 }
-
-#logout-button {
-
-}
-
 .carousel-button {
   margin: 2% 2%;
 }
