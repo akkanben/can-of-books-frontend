@@ -12,7 +12,8 @@ class BestBooks extends React.Component {
       books: [],
       modal: false,
       modalTitle: '',
-      booktoEdit: {}
+      booktoEdit: {},
+      carouselIndex: 0
     }
   }
 
@@ -34,7 +35,7 @@ class BestBooks extends React.Component {
         const booksResponse = await axios(config);
         this.setState({books: booksResponse.data});
       } catch (error) {
-        console.log(error);
+        console.error(error);
       }
     }
   }
@@ -98,12 +99,16 @@ class BestBooks extends React.Component {
         await axios(config);
         let filteredBooks = this.state.books.filter(book => book._id !== id);
         this.setState({books: filteredBooks});
+        this.setState({carouselIndex: 0});
       } catch (error) {
         console.error(error.toString());
       }
     }
   }
 
+  setCarouselIndex = (index) => {
+    this.setState({carouselIndex: index});
+  }
 
   putBooks = async (id, bookObj) => {
     if (this.props.auth0.isAuthenticated) {
@@ -140,6 +145,8 @@ class BestBooks extends React.Component {
         <Button className="carousel-button" onClick={() => this.showModal('Create a Book')} >Create Book</Button>
         {this.state.books.length > 0 ?
           <BookCarousel
+            setCarouselIndex={this.setCarouselIndex}
+            carouselIndex={this.state.carouselIndex}
             showModal={this.showModal}
             books={this.state.books}
             deleteBooks={this.deleteBooks} />
