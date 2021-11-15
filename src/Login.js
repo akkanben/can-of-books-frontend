@@ -1,18 +1,18 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
 import LoginButton from './LoginButton';
+import Card from 'react-bootstrap/Card';
 import './Login.css';
 
 class Login extends React.Component {
   render() {
     return (
-      <Card style={{width: '18rem'}}>
+      <Card>
         <Card.Body>
-          <Card.Title>Log In</Card.Title>
           <Card.Text>
-            Click Below to Log In
+            Welcome to Can of Books, please login to get started.
           </Card.Text>
-          <LoginButton loginHandler={this.props.loginHandler} />
+          <LoginButton />
+
         </Card.Body>
       </Card>
     )

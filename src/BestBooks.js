@@ -3,6 +3,7 @@ import axios from 'axios';
 import BookCarousel from './BookCarousel';
 import BookFormModal from './BookFormModal';
 import Button from 'react-bootstrap/Button';
+import {withAuth0} from '@auth0/auth0-react';
 
 class BestBooks extends React.Component {
   constructor(props) {
@@ -11,7 +12,8 @@ class BestBooks extends React.Component {
       books: [],
       modal: false,
       modalTitle: '',
-      booktoEdit: {}
+      booktoEdit: {},
+      carouselIndex: 0
     }
   }
 
@@ -20,12 +22,41 @@ class BestBooks extends React.Component {
   }
 
   getBooks = async () => {
-    let apiUrl = `${process.env.REACT_APP_DB_URL}/books?email=${this.props.email}`;
-    try {
-      const response = await axios.get(apiUrl);
-      this.setState({books: response.data})
-    } catch (error) {
-      console.log(error);
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'get',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: '/books'
+      }
+      try {
+        const booksResponse = await axios(config);
+        this.setState({books: booksResponse.data});
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
+  postBooks = async (bookObj) => {
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'post',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: '/books',
+        data: bookObj,
+      }
+      try {
+        let response = await axios(config);
+        this.setState({books: [...this.state.books, response.data]})
+      } catch (error) {
+        console.error(error.toString());
+      }
     }
   }
 
@@ -53,34 +84,49 @@ class BestBooks extends React.Component {
     })
   }
 
-  postBooks = async (bookObj) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books`
-    try {
-      let response = await axios.post(url, {...bookObj, email: this.props.email});
-      this.setState({books: [...this.state.books, response.data]})
-    } catch (error) {
-      alert(error.toString());
+  deleteBooks = async (id, bookObj) => {
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'delete',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: `/books/${id}`,
+        data: {...bookObj, email: this.props.auth0.user.email},
+      }
+      try {
+        await axios(config);
+        let filteredBooks = this.state.books.filter(book => book._id !== id);
+        this.setState({books: filteredBooks});
+        this.setState({carouselIndex: 0});
+      } catch (error) {
+        console.error(error.toString());
+      }
     }
   }
 
-  deleteBooks = async (id) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`
-    try {
-      await axios.delete(url);
-      let filteredBooks = this.state.books.filter(book => book._id !== id);
-      this.setState({books: filteredBooks});
-    } catch (error) {
-      alert(error.toString());
-    }
-  };
+  setCarouselIndex = (index) => {
+    this.setState({carouselIndex: index});
+  }
 
   putBooks = async (id, bookObj) => {
-    const url = `${process.env.REACT_APP_DB_URL}/books/${id}?email=${this.props.email}`
-    try {
-      await axios.put(url, bookObj);
-      this.getBooks();
-    } catch (error) {
-      alert(error.toString());
+    if (this.props.auth0.isAuthenticated) {
+      const res = await this.props.auth0.getIdTokenClaims();
+      const jwt = res.__raw;
+      const config = {
+        headers: {"Authorization": `Bearer ${jwt}`},
+        method: 'put',
+        baseURL: process.env.REACT_APP_DB_URL,
+        url: `/books/${id}`,
+        data: {...bookObj, email: this.props.auth0.user.email},
+      }
+      try {
+        await axios(config);
+        this.getBooks();
+      } catch (error) {
+        console.error(error.toString());
+      }
     }
   }
 
@@ -99,6 +145,8 @@ class BestBooks extends React.Component {
         <Button className="carousel-button" onClick={() => this.showModal('Create a Book')} >Create Book</Button>
         {this.state.books.length > 0 ?
           <BookCarousel
+            setCarouselIndex={this.setCarouselIndex}
+            carouselIndex={this.state.carouselIndex}
             showModal={this.showModal}
             books={this.state.books}
             deleteBooks={this.deleteBooks} />
@@ -109,4 +157,4 @@ class BestBooks extends React.Component {
   }
 }
 
-export default BestBooks;
+export default withAuth0(BestBooks);

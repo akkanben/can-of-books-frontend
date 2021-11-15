@@ -7,11 +7,12 @@ import Container from 'react-bootstrap/Container';
 
 
 class BookCarousel extends React.Component {
+
   render() {
     return (
       <>
         <Container slide="true">
-          <Carousel >
+          <Carousel activeIndex={this.props.carouselIndex} onSelect={(e) => this.props.setCarouselIndex(e)} >
             {this.props.books.map((book) => {
               return (
                 <Carousel.Item id={book._id} >

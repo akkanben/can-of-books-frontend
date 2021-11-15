@@ -1,6 +1,7 @@
 import {Component} from "react";
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import {withAuth0} from '@auth0/auth0-react';
 
 
 class NewBookForm extends Component {
@@ -10,7 +11,7 @@ class NewBookForm extends Component {
     const title = event.target.formTitle.value;
     const description = event.target.formDescription.value;
     const status = event.target.formStatus.checked;
-    const bookObj = {title, description, status};
+    const bookObj = {title, description, status, email: this.props.auth0.user.email};
     event.target.reset();
     this.props.postBooks(bookObj);
   }
@@ -28,7 +29,7 @@ class NewBookForm extends Component {
             <Form.Control type="name" placeholder="Enter book description" />
           </Form.Group>
           <Form.Group className="mb-3" controlId="formStatus">
-            <Form.Check type="checkbox" label="read"/>
+            <Form.Check type="checkbox" label="read" />
           </Form.Group>
           <Button variant="dark" type="submit">
             Submit
@@ -39,4 +40,4 @@ class NewBookForm extends Component {
   }
 };
 
-export default NewBookForm;
+export default withAuth0(NewBookForm);
